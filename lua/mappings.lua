@@ -28,14 +28,10 @@ local function smart_tab()
   end
   
   -- If not exiting, use normal tab behavior
-  -- Check if we're in insert mode and there's text before cursor for indentation
   local before_cursor = line:sub(1, col)
   if before_cursor:match("^%s*$") then
-    -- If only whitespace before cursor, insert tab for indentation
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
   else
-    -- If there's text before cursor, try to trigger completion or insert tab
-    -- You can customize this behavior based on your completion setup
     local has_cmp, cmp = pcall(require, "cmp")
     if has_cmp and cmp.visible() then
       cmp.select_next_item()
@@ -58,4 +54,17 @@ map("i", "<S-Tab>", function()
   end
 end, { desc = "Reverse tab completion" })
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+-- Copy to system clipboard in visual mode with Ctrl+c
+map("v", "<C-c>", '"+y', { desc = "Copy to system clipboard" })
+
+-- Paste from system clipboard in normal mode with Ctrl+v
+map("n", "<C-v>", '"+p', { desc = "Paste from system clipboard" })
+
+-- Paste from system clipboard in insert mode with Ctrl+v
+map("i", "<C-v>", '<C-r>+', { desc = "Paste from system clipboard (insert)" })
+
+-- Paste from system clipboard in visual mode with Ctrl+v (replaces selection)
+map("v", "<C-v>", '"+p', { desc = "Paste from system clipboard (visual)" })
+
+
