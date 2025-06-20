@@ -1,7 +1,6 @@
 require "nvchad.mappings"
 
 -- add yours here
-
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -19,7 +18,7 @@ local function smart_tab()
   local exit_chars = { '"', "'", ")", "}", ">", "]" }
   
   -- Check if cursor is right before one of these characters
-  for _, char in ipairs(exit_chars) do
+  for _, char in ipairs(exit_chars) do  -- FIXED: was "*, char" should be "_, char"  
     if char_at_cursor == char then
       -- Move cursor one position to the right (exit the bracket/quote)
       vim.api.nvim_win_set_cursor(0, {vim.api.nvim_win_get_cursor(0)[1], col + 1})
@@ -54,7 +53,6 @@ map("i", "<S-Tab>", function()
   end
 end, { desc = "Reverse tab completion" })
 
-
 -- Copy to system clipboard in visual mode with Ctrl+c
 map("v", "<C-c>", '"+y', { desc = "Copy to system clipboard" })
 
@@ -67,4 +65,13 @@ map("i", "<C-v>", '<C-r>+', { desc = "Paste from system clipboard (insert)" })
 -- Paste from system clipboard in visual mode with Ctrl+v (replaces selection)
 map("v", "<C-v>", '"+p', { desc = "Paste from system clipboard (visual)" })
 
+-- writing and quit files
+map("n","<ESC>","<cmd>q<CR>",{desc= "Quit files with ESC"})
+
+-- COMPILE & RUN MAPPINGS:
+
+-- Alternative mapping with leader key (reliable)
+map("n", "<leader>r", function()
+  require("configs.compile_run").compile_and_run()
+end, { desc = "Compile and run current file" })
 
