@@ -71,7 +71,7 @@ map("n","<ESC>","<cmd>q<CR>",{desc= "Quit files with ESC"})
 -- COMPILE & RUN MAPPINGS:
 
 -- Alternative mapping with leader key (reliable)
-map("n", "<leader>r", function()
+map("n", "<leader>rr", function()
   require("configs.compile_run").compile_and_run()
 end, { desc = "Compile and run current file" })
 
