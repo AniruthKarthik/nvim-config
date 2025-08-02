@@ -12,6 +12,15 @@ return {
       require "configs.lspconfig"
     end,
   },
+  
+  {
+  "stevearc/conform.nvim",
+  event = { "BufReadPre", "BufNewFile" },
+  config = function()
+    require("configs.conform").setup()
+  end,
+},
+
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
