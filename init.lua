@@ -36,3 +36,5 @@ require "configs"
 vim.schedule(function()
   require "mappings"
 end)
+
+vim.opt.clipboard = "unnamedplus"
