@@ -38,5 +38,13 @@ return {
       require("configs.lspconfig")
     end,
   },
+
+  {
+    "stevearc/conform.nvim",
+    event = "BufWritePre",
+    config = function()
+      require("configs.conform").setup()
+    end,
+  },
 }
 
