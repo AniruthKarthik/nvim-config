@@ -65,6 +65,11 @@ map("i", "<C-v>", '<C-r>+', { desc = "Paste from system clipboard (insert)" })
 -- Paste from system clipboard in visual mode with Ctrl+v (replaces selection)
 map("v", "<C-v>", '"+p', { desc = "Paste from system clipboard (visual)" })
 
+-- Keybindings for methods/functions using nvim-treesitter-textobjects
+map("n", "yim", "yif", { desc = "Yank inside method/function" })
+map("n", "dam", "daf", { desc = "Delete around method/function" })
+map("n", "cim", "cif", { desc = "Change/Clear inside method/function" })
+
 -- writing and quit files
 map("n","<ESC>","<cmd>q<CR>",{desc= "Quit files with ESC"})
 

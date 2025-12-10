@@ -1,24 +1,21 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
-    build = ":TSUpdate",
-    dependencies = {
-      "windwp/nvim-ts-autotag",
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "vim", "lua", "vimdoc",
-          "html", "css", "javascript", "typescript",
-          "python", "java", "cpp", "c", "rust", "go"
+        opts = {
+          textobjects = {
+            select = {
+              enable = true,
+              lookahead = true,
+              keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+              },
+            },
+          },
+          indent = { enable = false }, -- Explicitly disable Treesitter indentation
         },
-        highlight = { enable = true },
-        indent = { enable = true },
-        autotag = { enable = true },
-      })
-    end,
   },
 
   -- Install Mason
@@ -46,5 +43,18 @@ return {
       require("configs.conform").setup()
     end,
   },
+
+  -- Completion plugins
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require("configs.cmp")
+    end,
+  },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "L3MON4D3/LuaSnip" },
+  { "saadparwaiz1/cmp_luasnip" },
 }
 
