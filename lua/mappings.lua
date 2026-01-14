@@ -16,6 +16,13 @@ local function smart_tab()
   
   -- Characters we want to exit from
   local exit_chars = { '"', "'", ")", "}", ">", "]" }
+
+  -- Check if we can jump to next snippet placeholder
+  local has_luasnip, luasnip = pcall(require, "luasnip")
+  if has_luasnip and luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+    return
+  end
   
   -- Check if cursor is right before one of these characters
   for _, char in ipairs(exit_chars) do  -- FIXED: was "*, char" should be "_, char"  
@@ -45,6 +52,12 @@ map("i", "<Tab>", smart_tab, { desc = "Smart tab - exit brackets/quotes or norma
 
 -- Optional: Map Shift+Tab for reverse completion navigation if you use completion
 map("i", "<S-Tab>", function()
+  local has_luasnip, luasnip = pcall(require, "luasnip")
+  if has_luasnip and luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+    return
+  end
+
   local has_cmp, cmp = pcall(require, "cmp")
   if has_cmp and cmp.visible() then
     cmp.select_prev_item()
