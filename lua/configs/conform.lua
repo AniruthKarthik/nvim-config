@@ -10,7 +10,7 @@ function M.setup()
       json = { "prettier" },
       javascript = { "prettier" },
       lua = { "stylua" },
-      python = { "isort", "black" },
+      python = { "autopep8" },
       c = { "clangformat" },
       cpp = { "clangformat" },
       java = { "jdtls" },
@@ -18,48 +18,14 @@ function M.setup()
       yar = { "prettier" },
     },
     format_on_save = {
-      lsp_fallback = true,
+      lsp_format = "fallback",
       async = false,
       timeout_ms = 5000,
-      callback = function(bufnr)
-        print("Format triggered")
-      end,
     },
     formatters = {
-      black = {
-        command = function()
-          local venv = os.getenv("VIRTUAL_ENV")
-          if venv then
-            return venv .. "/bin/python"
-          end
-          return "python"
-        end,
-        args = {
-          "-m", "black", "--stdin-filename", "$FILENAME",
-          "--quiet", "--line-length", "120", "-"
-        },
-        stdin = true,
-        timeout_ms = 8000,
-        exit_codes = { 0 },
-        env = {
-          PYTHONUNBUFFERED = "1",
-        },
-      },
-      isort = {
-        command = function()
-          local venv = os.getenv("VIRTUAL_ENV")
-          if venv then
-            return venv .. "/bin/python"
-          end
-          return "python"
-        end,
-        args = { "-m", "isort", "--stdout", "--filename", "$FILENAME", "-" },
-        stdin = true,
-        timeout_ms = 5000,
-        exit_codes = { 0 },
-        env = {
-          PYTHONUNBUFFERED = "1",
-        },
+      autopep8 = {
+        command = "autopep8",
+        args = { "--stdin-filename", "$FILENAME", "-" },
       },
     },
     log_level = vim.log.levels.WARN,

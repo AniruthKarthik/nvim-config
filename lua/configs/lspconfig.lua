@@ -27,12 +27,20 @@ for _, lsp in ipairs(servers) do
   end
 
   if lsp == "pylsp" then
+    opts.handlers = {
+      ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+        result.diagnostics = vim.tbl_filter(function(d)
+          return not vim.tbl_contains({ "E225", "W291", "E501", "E231", "E302", "W293" }, d.code)
+        end, result.diagnostics)
+        vim.lsp.handlers["textDocument/publishDiagnostics"](err, result, ctx, config)
+      end,
+    }
     opts.settings = {
       pylsp = {
         plugins = {
           -- 🔧 Formatter
-          black = { enabled = true },
-          autopep8 = { enabled = false },
+          black = { enabled = false },
+          autopep8 = { enabled = true },
           yapf = { enabled = false },
 
           -- 🚫 Disable style linters
