@@ -7,10 +7,10 @@ local capabilities = nvlsp.capabilities
 require("mason").setup()
 
 require("mason-lspconfig").setup {
-  ensure_installed = { "pylsp", "clangd" },
+  ensure_installed = { "pylsp", "clangd", "gopls", "ts_ls" },
 }
 
-local servers = { "pylsp", "clangd" }
+local servers = { "pylsp", "clangd", "gopls", "ts_ls" }
 
 for _, lsp in ipairs(servers) do
   local opts = {

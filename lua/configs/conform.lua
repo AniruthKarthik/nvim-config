@@ -14,6 +14,7 @@ function M.setup()
       c = { "clangformat" },
       cpp = { "clangformat" },
       java = { "jdtls" },
+      go = { "goimports", "gofmt" },
       yara = { "prettier" },
       yar = { "prettier" },
     },

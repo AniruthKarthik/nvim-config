@@ -1,21 +1,22 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-        opts = {
-          textobjects = {
-            select = {
-              enable = true,
-              lookahead = true,
-              keymaps = {
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner",
-              },
-            },
+    opts = {
+      ensure_installed = { "lua", "python", "javascript", "typescript", "c", "cpp", "go" },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
           },
-          indent = { enable = false }, -- Explicitly disable Treesitter indentation
         },
+      },
+      indent = { enable = false }, -- Explicitly disable Treesitter indentation
+    },
   },
 
   -- Install Mason
