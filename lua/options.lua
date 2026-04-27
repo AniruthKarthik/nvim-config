@@ -6,6 +6,13 @@ require "nvchad.options"
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
 vim.cmd("let g:netrw_liststyle = 3")
+vim.cmd "syntax enable"
+vim.cmd "filetype plugin indent on"
+
+local ts_runtime = vim.fn.stdpath "data" .. "/lazy/nvim-treesitter/runtime"
+if vim.uv.fs_stat(ts_runtime) then
+  vim.opt.runtimepath:append(ts_runtime)
+end
 
 local opt = vim.opt
 

@@ -3,6 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = { "lua", "python", "javascript", "typescript", "c", "cpp", "go" },
+      highlight = { enable = true },
       textobjects = {
         select = {
           enable = true,
@@ -58,4 +59,3 @@ return {
   { "L3MON4D3/LuaSnip" },
   { "saadparwaiz1/cmp_luasnip" },
 }
-
